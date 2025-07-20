@@ -1,0 +1,128 @@
+<!-- item will be appened to this layout -->
+<div id="log" class="sl__chat__layout">
+</div>
+
+<!-- chat item -->
+<script type="text/template" id="chatlist_item">
+  <div data-from="{from}" data-id="{messageId}">
+    <span class="meta" style="color: {color}">
+      <span class="badges">
+      </span>
+      <span class="name">{from}</span>
+    </span>
+
+    <span class="message">
+      {message}
+    </span>
+  </div>
+</script>
+
+
+
+<--- CSS --->
+@import url(https://fonts.googleapis.com/css?family=Roboto:700);
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    text-shadow: none; /* 0 0 1px #000, 0 0 2px #000; */
+    background: {background_color};
+    font-family: 'Roboto';
+    font-weight: 700;
+    font-size: {font_size};
+    line-height: 1.5em;
+    color: {text_color};
+}
+
+#log {
+    display: flex;
+    flex-direction: column; /* Mesajları en altta başlayacak şekilde düzenledik */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 10px;
+    width: 100%;
+}
+
+#log>div {
+    display: flex;
+    flex-direction: column; /* Mesajları en altta başlayacak şekilde düzenledik */
+    animation: fadeInRight .3s ease forwards, fadeOut 0.5s ease {message_hide_delay} forwards;
+    -webkit-animation: fadeInRight .3s ease forwards, fadeOut 0.5s ease {message_hide_delay} forwards;
+    background: rgba(0, 0, 0, 0.5); /* Yarı saydam siyah arka plan ekledik */
+    border-radius: 15px 15px 15px 0; /* Sol alt köşeyi sivri bıraktık */
+    padding: 5px; /* Kenar boşlukları ekledik */
+    margin-bottom: 5px; /* Mesajlar arası boşluk ekledik */
+    max-width: 100%; /* Mesajın maksimum genişliğini belirledik */
+    align-self: flex-start; /* Mesajları sol üst köşeye hizaladık */
+}
+
+#log {
+    display: flex;
+    flex-direction: column; /* Mesajları en altta başlayacak şekilde düzenledik */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 5px;
+    width: 100%;
+}
+
+.colon {
+    display: none;
+}
+
+#log>div.deleted {
+    visibility: hidden;
+}
+
+#log .emote {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    padding: 0.2em 0.2em;
+    position: relative;
+}
+
+#log .emote img {
+    display: inline-block;
+    height: 1em;
+    opacity: 0;
+}
+
+#log .message, #log .meta {
+    vertical-align: top;
+    display: table-cell;
+    padding: 0px 5px;
+}
+
+#log .meta {
+    text-align: left; /* .meta'yı sola hizalayalım */
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    flex: 0 0 auto; /* Sabit genişlik, içeriğe göre genişlemesin */
+}
+
+#log .message {
+    word-break: break-all; /* Mesaj içeriğinin kutu içinde taşmasını önlemek ve kelimenin kendi içinde bölünmesini sağlamak için */
+}
+
+.badge {
+    display: inline-block;
+    margin-right: 0.2em;
+    position: relative;
+    height: 1em;
+    vertical-align: middle;
+    top: -0.1em;
+}
+
+.name {
+    margin-left: 0em;
+}

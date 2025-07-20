@@ -1,0 +1,89 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    text-shadow: none;
+    background: {background_color};
+    font-family: Arial, sans-serif; /* Arial veya alternatif bir sans-serif fontu kullanabilirsiniz */
+    font-weight: 400; /* Arial genellikle daha ince bir fonttur, ancak bu değeri ayarlayarak deneyebilirsiniz */
+    font-size: {font_size};
+    line-height: 1.5em;
+    color: {text_color};
+}
+
+#log {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 5px;
+    width: 100%;
+}
+
+#log>div {
+    float: none;
+    animation: fadeInRight .3s ease forwards, fadeOut 0.5s ease {message_hide_delay} forwards;
+    -webkit-animation: fadeInRight .3s ease forwards, fadeOut 0.5s ease {message_hide_delay} forwards;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 15px 15px 15px 0;
+    padding: 5px;
+    margin-bottom: 5px;
+    max-width: 100%;
+    align-self: flex-start;
+}
+
+#log .emote {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    padding: 0.2em 0.2em;
+    position: relative;
+}
+
+#log .emote img {
+    display: inline-block;
+    height: 1em;
+    opacity: 0;
+}
+
+#log .meta {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    flex: 0 0 auto;
+    padding: 0px 3px 0px 5px;
+}
+
+#log .message {
+    word-wrap: break-word; /* Uzun kelimeleri bölme yerine alt satıra geçir */
+    flex: 1;
+    padding: 0px 5px 0px 0px;
+}
+
+.colon {
+    display: none;
+}
+
+#log>div.deleted {
+    visibility: hidden;
+}
+
+.badge {
+    display: inline-block;
+    margin-right: 2px;
+    position: relative;
+    height: 1em;
+    vertical-align: middle;
+    top: -0.1em;
+}
+
+.name {
+    margin-left: 0px;
+}

@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+#wrapper {
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  margin: 0 auto;
+}
+
+#log {
+  font: 16px "Roboto", sans-serif;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  color: #000000;
+  overflow: hidden;
+  line-height: 1.53em;
+  font-weight: bold;
+}
+
+#log > div {
+  animation: fadeInUp 500ms ease, fadeOutUp 1s ease 10s forwards;
+  padding: 0.5em;
+  position: relative;
+}
+
+#log > div + div {
+  margin-top: 0.5em;
+}
+
+#log > div.deleted {
+  visibility: hidden;
+}
+
+.background {
+  position: absolute;
+  top: 1.2em;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: #5A4E7C;
+  opacity: 0.5;
+  border-radius: 0px 20px 20px 20px;
+}
+
+.chat-entry {
+  position: relative;
+  z-index: 1;
+}
+
+.chat-entry .meta {
+  position: relative;
+}
+
+.chat-entry .meta::before {
+  content: '';
+  position: absolute;
+  top: -0.1em;
+  right: -0.4em;
+  bottom: -0.1em;
+  left: -0.2em;
+  background: #C7B8E2;
+  opacity: 1;
+  border-radius: 6px 6px 6px 0px;
+  margin-left: -4px;
+}
+
+.chat-entry .meta > span {
+  position: relative;
+  z-index: 1;
+}
+
+.message {
+  color: #FFFFFF;
+  font-weight: normal;
+  word-wrap: break-word;
+}
+
+.name {
+  color: #000000;
+  font-weight: 500;
+}
+
+.badges {
+  margin-right: 0.2em;
+}
+
+.badges .badge {
+  margin-left: 0.15em;
+  height: 0.8em;
+  width: 0.8em;
+}
+
+.no-badges .badges {
+  display: none;
+}
