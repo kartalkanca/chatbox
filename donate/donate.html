@@ -1,0 +1,142 @@
+<div id="wrap">
+    <div class="goal-cont">
+      <div id="goal-bar">
+        <div id="goal-progress"></div>
+      </div>
+      <div class="goal-text">
+        <span id="goal-current">0</span>
+        <span class="goal-label" id="title">DESTEK OLUN</span> <!-- Başlık buraya yerleşiyor -->
+        <span id="goal-total">100</span>
+      </div>
+    </div>
+  </div>
+
+
+
+  <--- CSS --->
+  /* Wrapper */
+#wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Ortalamayı dikeyde yapıyoruz */
+  height: 100vh;
+  background-color: transparent;
+  position: relative; /* Konteynerin pozisyonunu ayarlıyoruz */
+}
+
+/* Goal Container */
+.goal-cont {
+  position: absolute;
+  left: 50%; /* Yatayda ortalamak için */
+  transform: translateX(-50%); /* Kendini tam ortalamak için */
+  width: 500px; /* Barın genişliği */
+  height: 50px; /* Barın yüksekliği */
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 29px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 3px solid white; /* Beyaz ve Kalın Çerçeve */
+  position: relative;
+}
+
+/* Goal Text */
+.goal-text {
+  position: absolute;
+  z-index: 2;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  color: white;
+  font-family: 'Roboto', sans-serif; /* Roboto fontu */
+  font-weight: 700; /* Roboto Bold */
+  font-size: 20px; /* Hedeflerin text boyutunu değiştirmedik */
+  text-transform: uppercase;
+}
+
+#goal-current {
+  margin-left: 20px; /* Mevcut değerin soluna boşluk */
+  font-size: 20px; /* Hedef değerlerinin boyutunu 20px yapıyoruz */
+}
+
+#goal-total {
+  margin-right: 20px; /* Hedef değerin sağına boşluk */
+  font-size: 20px; /* Hedef değerlerinin boyutunu 20px yapıyoruz */
+}
+
+/* Goal Title Text */
+.goal-label {
+  font-size: 30px; /* Başlık text boyutunu 30px yapıyoruz */
+  font-weight: 700; /* Bold olarak kalacak */
+  text-transform: uppercase;
+}
+
+/* Goal Bar */
+#goal-bar {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  border-radius: 25px; /* Barın kenarlarını yuvarlak yapmak için */
+}
+
+/* Progress Bar */
+#goal-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%; /* Başlangıçta 0% */
+  background: linear-gradient(135deg, #f5e03c, #ff7f32, #e60000); /* Sarıdan Turuncuya ve Kırmızıya geçiş */
+  z-index: 1;
+  border-radius: 25px; /* Barın iç kısmının da yuvarlak olması için */
+}
+
+
+
+<--- JS --->
+document.addEventListener('goalLoad', function (obj) {
+    const goalDetails = obj.detail;
+  
+    if (goalDetails) {
+      // Başlık verisini güncelle, eğer başlık yoksa alternatif mesaj göster
+      const title = goalDetails.title || 'DESTEK OLUN';
+      $('#title').html(title); // Başlık ekrana ekleniyor
+  
+      // Hedeflerin mevcut ve toplam değerlerini güncelle
+      $('#goal-current').text(goalDetails.amount?.current || '0');
+      $('#goal-total').text(goalDetails.amount?.target || '100');
+      
+      // İlerleme barını güncelle
+      const progress = Math.min(
+        (goalDetails.amount?.current / goalDetails.amount?.target) * 100,
+        100
+      );
+      $('#goal-progress').css('width', `${progress}%`);
+    } else {
+      console.warn('Goal details not found');
+    }
+  });
+  
+  document.addEventListener('goalEvent', function (obj) {
+    const goalDetails = obj.detail;
+    
+    if (goalDetails) {
+      // Mevcut hedef değerini güncelle
+      $('#goal-current').text(goalDetails.amount?.current || '0');
+      
+      // İlerleme barını güncelle
+      const progress = Math.min(
+        (goalDetails.amount?.current / goalDetails.amount?.target) * 100,
+        100
+      );
+      $('#goal-progress').css('width', `${progress}%`);
+    } else {
+      console.warn('Goal details not found');
+    }
+  });
